@@ -14,17 +14,12 @@ class ModelTemplate extends TemplateAbstract
 {
     protected $model = null;
     protected $defaultTemplatePath = __DIR__.DIRECTORY_SEPARATOR."Model.php.template";
-    protected $defaultStoragePath = DIRECTORY_SEPARATOR."App";
 
     public function __construct(ModelInterface $model, string $storagePath, string $templatePath = null)
     {
         $this->model           = $model;
         $this->templatePath    = $templatePath ?: $this->defaultTemplatePath;
-        if (realpath($storagePath) === false) {
-            $this->storagePath = getcwd().DIRECTORY_SEPARATOR.$storagePath.$this->defaultStoragePath;
-        } else {
-            $this->storagePath = realpath($storagePath).$this->defaultStoragePath;
-        }
+        $this->storagePath     = $this->buildStoragePath($storagePath);
         $this->storageFileName = $model->getName().".php";
     }
 
@@ -139,5 +134,23 @@ class ModelTemplate extends TemplateAbstract
     {
         return lcfirst($this->makeCamelCase($name));
 
+    }
+
+    /**
+     * Builds the path to create the model
+     *
+     * @param string $storagePath
+     * @return string
+     */
+    protected function buildStoragePath(string $storagePath): string
+    {
+        $defaultStoragePath = DIRECTORY_SEPARATOR . "App" . DIRECTORY_SEPARATOR . "Domains" .
+            DIRECTORY_SEPARATOR . $this->model->getName() . DIRECTORY_SEPARATOR . "Models";
+
+        if (realpath($storagePath) === false) {
+            return getcwd() . DIRECTORY_SEPARATOR . $storagePath . $defaultStoragePath;
+        }
+
+        return realpath($storagePath) . $defaultStoragePath;
     }
 }
