@@ -4,13 +4,13 @@ Proudly fueled by Laravel ^5.4 :)
 
 **Yep, that's right! An API out-of-the-box with a couples of console commands :)**
 
-# Instalation
+## Instalation
 ```
 git clone https://github.com/ajaaleixo/larastart
 cd larastart
 ```
 
-# Usage
+## Usage
 To use it, you just need to provide a json file (+ formats to come) with the list of Resources that your application will need.
 
 Larastart provides you several commands:
@@ -19,10 +19,11 @@ Available commands:
   help             Displays help for a command
   list             Lists commands
  make
-  make:all         Wrapper to run all the other commands at once
+  make:all         Wrapper to run all the other commands (except seeds) at once
   make:api         Generates API from a resource file
   make:migration   Generates Migrations from a resource file
   make:model       Generates Models from a resource file
+  make:transformer Generates Transformers 
   make:seed        Generates Seeds from the spreadsheet file
 ```
 
@@ -47,12 +48,12 @@ php bin/larastart make:seed author examples/resources/author.csv ../output_dir
 ```
 
 
-# Resources File Format
+## Resources File Format
 
 A Resource is a standard file to describe your Data Model Structure, with validation rules. Those files **should** have an array of Resource Items.
 You may pass as a resource argument a file or a directory with resource files.
 
-## JSON
+### JSON
 Each Resource file, is composed by Resource Items, that are described by:
 - name
 - description
@@ -72,4 +73,4 @@ A **column** is composed by:
 - _unsigned: (Optional) To describe a column as unsigned;
 - _index: (Optional) To add an index on this column. If a string is given it will be the index name. If boolean is given the index name will be automatically generated. If array of strings is given it will generate a compound index of the provided column names
 
-### Resource example for a Blog Application [blog.json](https://github.com/ajaaleixo/larastart/blob/master/examples/resources/blog.json)
+#### Resource example for a Blog Application [blog.json](https://github.com/ajaaleixo/larastart/blob/master/examples/resources/blog.json)

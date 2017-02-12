@@ -41,6 +41,7 @@ class MakeAll extends AbstractCommand
             'make:api',
             'make:model',
             'make:migration',
+            'make:transformer'
         ];
 
         foreach ($commandsToRun as $cmd) {
