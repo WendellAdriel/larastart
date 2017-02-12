@@ -7,7 +7,7 @@
 
 !!namespace!!
 
-use App\!!modelName!!;
+use App\Domains\!!modelName!!\Models\!!modelName!!;
 use App\Http\Requests\!!storeRequestName!!;
 use App\Http\Controllers\Controller;
 
